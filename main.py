@@ -21,10 +21,10 @@ class User:
 users: [User] = []
 
 
-async def add_user(ctx):
+def add_user(ctx):
     r = 0
     for user in users:
-        if user.id == ctx.author.id: r = r + 1
+        if user.id == ctx.author.id: r += 1
     if r == 0:
         users.append(User(ctx.author.id))
 
@@ -36,12 +36,6 @@ def game_main(user):
     else:
         user.w = user.w + 1
         return "Выиграл"
-
-
-@bot.command()
-async def ping(ctx):
-    await add_user(ctx)
-    await ctx.send('pong')
 
 
 @bot.command()
