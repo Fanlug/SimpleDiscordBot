@@ -1,0 +1,2 @@
+TOKEN: str = 'token'
+PREFIX: str = '#'
