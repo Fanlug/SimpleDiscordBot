@@ -78,7 +78,7 @@ async def time(ctx):
         '\n' +
         str(int(3600 - times.time()) % 3600) +
         '\n' +
-        '<t:' + str(int(times.time()) + int(3600 - times.time()) % 3600) + ':f>')
+        '<t:' + str(int(times.time()) + int(3600 - times.time()) % 3600) +  ':f>')
 
 
 bot.run(config.TOKEN)
