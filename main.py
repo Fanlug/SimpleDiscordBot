@@ -1,5 +1,5 @@
 import random
-import time
+import time as times
 
 import discord
 from discord.ext import commands
@@ -31,10 +31,10 @@ def add_user(ctx):
 
 def game_main(user):
     if random.randint(0, 2) >= 1:
-        user.l = user.l + 1
+        user.l += 1
         return "Проиграл"
     else:
-        user.w = user.w + 1
+        user.w += 1
         return "Выиграл"
 
 
@@ -67,57 +67,18 @@ async def server_stats(ctx):
 
 @bot.command()
 async def numbers(ctx, *args):
-    r = 1
-    message = args.__str__()[2:-3]
-    form_message = ''
-    for i in range(0, len(message)):
-        if ('0' > message[i] or message[i] > '9') and (r == 1 or r == 4):
-            r = 1
-            form_message = form_message + message[i]
-        elif '0' <= message[i] <= '9' and (r == 1 or r == 4):
-            r = 2
-            form_message = form_message + '*' + message[i]
-        elif (r == 3 or r == 2) and '0' <= message[i] <= '9':
-            r = 3
-            form_message = form_message + message[i]
-        elif (r == 3 or r == 2) and ('0' > message[i] or message[i] > '9'):
-            r = 4
-            form_message = form_message + '*' + message[i]
-    if r == 2 or r == 3:
-        form_message = form_message + '*'
-    print(form_message)
-    state2 = 1
-    begin = []
-    end = []
-    l = 0
-    pos = 0
-    for i in range(0, len(form_message)):
-        if form_message[i] == '*' and state2 == 1:
-            if '9' >= form_message[i + 1] >= '1':
-                state2 = 2
-                l = l + 1
-                pos = i
-        elif form_message[i] == '*' and state2 == 2:
-            if l > 2:
-                print(str(pos) + ' ' + str(i))
-                begin.append(pos)
-                end.append(i)
-            l = 0
-            pos = 0
-            state2 = 1
-        elif state2 == 2 and l > 0:
-            l = l + 1
-    for i in range(len(begin) - 1, -1, -1):
-        form_message = form_message[:end[i]] + '**' + form_message[end[i]:]
-        form_message = form_message[:begin[i]] + '**' + form_message[begin[i]:]
-    await ctx.send('>>> ' + message + '\n' + form_message)
+    await ctx.send(f'LOL')
 
 
 @bot.command()
-async def times(ctx):
+async def time(ctx):
     await ctx.send(
-        '>>> <t:' + str(int(time.time())) + ':f>' + '\n' + str(int(3600 - time.time()) % 3600) + '\n' + '<t:' + str(
-            int(time.time()) + int(3600 - time.time()) % 3600) + ':f>')
+        '>>> <t:' +
+        str(int(times.time())) + ':f>' +
+        '\n' +
+        str(int(3600 - times.time()) % 3600) +
+        '\n' +
+        '<t:' + str(int(times.time()) + int(3600 - times.time()) % 3600) + ':f>')
 
 
 bot.run(config.TOKEN)
