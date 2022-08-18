@@ -1,5 +1,5 @@
 import random
-import time
+import time as times
 
 import discord
 from discord.ext import commands
@@ -31,10 +31,10 @@ def add_user(ctx):
 
 def game_main(user):
     if random.randint(0, 2) >= 1:
-        user.l = user.l + 1
+        user.l += 1
         return "Проиграл"
     else:
-        user.w = user.w + 1
+        user.w += 1
         return "Выиграл"
 
 
@@ -73,8 +73,12 @@ async def numbers(ctx, *args):
 @bot.command()
 async def time(ctx):
     await ctx.send(
-        '>>> <t:' + str(int(time.time())) + ':f>' + '\n' + str(int(3600 - time.time()) % 3600) + '\n' + '<t:' + str(
-            int(time.time()) + int(3600 - time.time()) % 3600) + ':f>')
+        '>>> <t:' +
+        str(int(times.time())) + ':f>' +
+        '\n' +
+        str(int(3600 - times.time()) % 3600) +
+        '\n' +
+        '<t:' + str(int(times.time()) + int(3600 - times.time()) % 3600) + ':f>')
 
 
 bot.run(config.TOKEN)
